@@ -8,7 +8,7 @@ public class SensonrAndMotorTest {
 	public static void main(String[] args) {
 		testMotors();
 		testIRSensor();
-		Button.LEDPattern(2);
+		testColorSensor();
 	}
 	
 	private static void testMotors() {
@@ -28,10 +28,23 @@ public class SensonrAndMotorTest {
 	private static void testIRSensor() {
 		Watcher watcher = new Watcher();
 		watcher.printDistances();
+		printRedUntilButtonIsUp();
+		watcher.printSeek();
+		printRedUntilButtonIsUp();
+	}
+	
+	private static void printRedUntilButtonIsUp() {
 		Button.LEDPattern(2);
 		while (Button.DOWN.isDown()) continue;
 		Button.LEDPattern(0);
-		watcher.printSeek();
+	}
+	
+	private static void testColorSensor() {
+		Reader reader = new Reader();
+		reader.readColors();
+		printRedUntilButtonIsUp();
+		reader.readLuminance();
+		printRedUntilButtonIsUp();
 	}
 
 }
