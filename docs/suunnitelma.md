@@ -1,4 +1,4 @@
- ### Suunnitelma
+### Suunnitelma
  
  Robotti tutkii ympäröivää maailmaansa ja reagoi kohtaamiinsa objekteihin tunnistamiensa värien perusteella. Esim. punaisen esteen kohdalla robotti voisi koittaa hyökätä, kun taas vihreää seurata ja keltaista kartettaa tms. Robotti pyrkii lähestymään aina lähintä löytämäänsä kohdetta.
  
