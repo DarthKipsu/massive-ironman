@@ -7,6 +7,7 @@ public class SensonrAndMotorTest {
 
 	public static void main(String[] args) {
 		testMotors();
+		testIRSensor();
 		Button.LEDPattern(2);
 	}
 	
@@ -22,6 +23,15 @@ public class SensonrAndMotorTest {
 		Delay.msDelay(100);
 		cruiser.moveBackward(20);
 		cruiser.closeMotors();
+	}
+	
+	private static void testIRSensor() {
+		Watcher watcher = new Watcher();
+		watcher.printDistances();
+		Button.LEDPattern(2);
+		while (Button.DOWN.isDown()) continue;
+		Button.LEDPattern(0);
+		watcher.printSeek();
 	}
 
 }
