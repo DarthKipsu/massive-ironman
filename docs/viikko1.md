@@ -1,1 +1,3 @@
- 
+Ensimmäisellä viikolla tein suunnitelman robotin toiminnasta ja asensin koodausympäristön. lejOS asentaminen brickiin tuotti aluksi hankaluuksia, mutta sain kaiken lopulta toimimaan. Rakensin myös nopean prototyyppi robotin, joka kykenee liikkumaan suunnitelman robotin tavoin ja johon on kiinnitetty infrapunasensori ja värientunnistus sensori, jotta pystyn tutkimaan sensorien ja moottorien toimintaa. Ohjelmoin netistä löytämieni esimerkkien avulla yksinkertaisen testiohjelman, joka käyttää moottoreita ja sensoreita.
+
+Seuraavalla viikolla aion suunnitella suunnitelman mukaisen robotin rakennetta, etenkin sensorien järkevän sijainnin kannalta ja toteuttaa toiminnallisuuksia mahdolisimman pitkälle. Ainakin robotin tulisi osata tunnistaa lähin kohde ja reagoida yhden tyyppiseen kohteeseen.
