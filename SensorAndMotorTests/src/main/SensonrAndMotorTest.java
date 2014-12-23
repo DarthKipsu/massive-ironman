@@ -13,7 +13,7 @@ public class SensonrAndMotorTest {
 	
 	private static void testMotors() {
 		Cruiser cruiser = new Cruiser();
-		cruiser.moveForward(20);
+		cruiser.moveForward(10);
 		Delay.msDelay(100);
 		cruiser.rotateLeft(90);
 		Delay.msDelay(1000);
@@ -21,7 +21,7 @@ public class SensonrAndMotorTest {
 		Delay.msDelay(1000);
 		cruiser.rotateLeft(90);
 		Delay.msDelay(100);
-		cruiser.moveBackward(20);
+		cruiser.moveBackward(10);
 		cruiser.closeMotors();
 	}
 	
