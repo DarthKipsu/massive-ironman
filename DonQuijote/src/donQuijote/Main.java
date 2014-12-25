@@ -1,5 +1,6 @@
 package donQuijote;
 
+import moving.Moving;
 import moving.ObjectFinder;
 
 public class Main {
