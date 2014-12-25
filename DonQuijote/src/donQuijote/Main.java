@@ -1,18 +1,18 @@
 package donQuijote;
 
-import lejos.utility.Delay;
-import moving.Head;
+import ai.Examiner;
+import moving.Moving;
 import moving.ObjectFinder;
 
 public class Main {
 
 	public static void main(String[] args) {
-		ObjectFinder of = new ObjectFinder();
-		Head head = new Head();
-		of.findNearestObject();
-		head.prolongToDefault();
-		Delay.msDelay(1000);
-		head.contractFully();
+		Moving move = new Moving();
+		ObjectFinder objFinder = new ObjectFinder(move);
+		Examiner examiner = new Examiner(move);
+		
+		int distance = objFinder.findNearestObject();
+		examiner.examineTargetAt(distance);
 	}
 
 }

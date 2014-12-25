@@ -1,33 +1,47 @@
 package moving;
 
-import lejos.utility.Delay;
-import donQuijote.LcdPrinter;
 import sensors.IRSensor;
 
 public class ObjectFinder {
 	
 	private Moving move;
 	private IRSensor iR;
+	private int nearestDegree;
+	private int nearestDist;
 	
-	public ObjectFinder() {
-		move = new Moving();
+	public ObjectFinder(Moving move) {
+		this.move = move;
 		iR = new IRSensor();
 	}
 	
-	public boolean findNearestObject() {
-		int nearestDegree = 0;
-		int nearestDist = 100;
+	public int findNearestObject() {
+		resetNearest();
+		rotateToFindNearest();
+		rotateTowardsNearest();
+		return nearestDist;
+	}
+	
+	private void resetNearest() {
+		nearestDegree = 0;
+		nearestDist = 100;
+	}
+	
+	private void rotateToFindNearest() {
 		for	(int i = 0; i < 360 / 5; i++) {
 			move.rotateLeft(5);
-			int distance = iR.measureDistance();
-			if (distance < nearestDist) {
-				nearestDist = distance;
-				nearestDegree = i;
-			}
+			updateNEarestIfNeeded(iR.measureDistance(), i);
 		}
-		move.rotateLeft(nearestDegree * 5);
-		LcdPrinter.draw(nearestDegree + " deg. (" + nearestDist + ")");
-		return nearestDist < 100;
+	}
+	
+	private void updateNEarestIfNeeded(int distance, int i) {
+		if (distance < nearestDist) {
+			nearestDist = distance;
+			nearestDegree = i * 5;
+		}
+	}
+	
+	private void rotateTowardsNearest() {
+		move.rotateLeft(nearestDegree);
 	}
 
 }
