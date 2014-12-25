@@ -27,7 +27,6 @@ public class ObjectFinder {
 		}
 		move.rotateLeft(nearestDegree * 5);
 		LcdPrinter.draw(nearestDegree + " deg. (" + nearestDist + ")");
-		Delay.msDelay(10000);
 		return nearestDist < 100;
 	}
 
