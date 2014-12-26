@@ -14,8 +14,8 @@ public class Moving {
 	public Moving() {
 		rightMotor = new EV3LargeRegulatedMotor(MotorPort.A);
 		leftMotor = new EV3LargeRegulatedMotor(MotorPort.D);
-		tireSpacing = 18; //was 18
-		travelPerDegree = 13.4;
+		tireSpacing = 22;
+		travelPerDegree = 14.6;
 	}
 	
 	public void moveForward(int centimeters) {
@@ -28,7 +28,7 @@ public class Moving {
 		move(-movement);
 	}
 	
-	public void rotateLeft(int degrees) {
+	public void rotateLeft(double degrees) {
 		int rotation = (int)Math.round(tireSpacing * Math.PI / (360 / degrees) / travelPerDegree * 360.0);
 		rotate(rotation);
 	}

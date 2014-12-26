@@ -15,6 +15,7 @@ public class Main {
 		
 		int distance = objFinder.findNearestObject();
 		examiner.examineTargetAt(distance/2);
+		move.closeMotors();
 	}
 
 }

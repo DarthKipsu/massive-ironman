@@ -8,19 +8,23 @@ public class ObjectFinder {
 	
 	private Moving move;
 	private Memory memory;
+	private int currentRotation;
 	private IRSensor iR;
 	private IRSample nearestTarget;
 	
 	public ObjectFinder(Moving move, Memory memory) {
 		this.move = move;
 		this.memory = memory;
+		currentRotation = 0;
 		iR = new IRSensor();
 	}
 	
 	public int findNearestObject() {
-		resetNearest();
-		rotateToFindNearest();
-		memory.analyzeData();
+		if (nearestTarget == null) {
+			resetNearest();
+			rotateToFindNearest();
+			memory.analyzeData();
+		}
 		rotateTowardsNearest();
 		return nearestTarget.getNearestDist();
 	}
@@ -42,7 +46,14 @@ public class ObjectFinder {
 	
 	private void rotateTowardsNearest() {
 		nearestTarget = memory.getDirection();
-		move.rotateLeft(nearestTarget.getNearestDegree());
+		int rotation = nearestTarget.getNearestDegree() - currentRotation;
+		if (rotation > 0 && rotation < 180) {
+			move.rotateLeft(rotation);
+		} else if (rotation > 0){
+			move.rotateRight(360 - rotation);
+		} else {
+			move.rotateRight(rotation);
+		}
 	}
 
 }
