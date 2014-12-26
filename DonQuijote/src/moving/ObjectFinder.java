@@ -18,6 +18,7 @@ public class ObjectFinder {
 		resetNearest();
 		rotateToFindNearest();
 		rotateTowardsNearest();
+		System.out.println(nearestDegree);
 		return nearestDist;
 	}
 	

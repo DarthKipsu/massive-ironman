@@ -12,7 +12,7 @@ public class Main {
 		Examiner examiner = new Examiner(move);
 		
 		int distance = objFinder.findNearestObject();
-		examiner.examineTargetAt(distance);
+		examiner.examineTargetAt(distance/2);
 	}
 
 }

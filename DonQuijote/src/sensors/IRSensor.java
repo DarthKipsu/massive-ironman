@@ -1,6 +1,4 @@
 package sensors;
-
-import donQuijote.LcdPrinter;
 import lejos.hardware.BrickFinder;
 import lejos.hardware.Button;
 import lejos.hardware.ev3.LocalEV3;
@@ -22,7 +20,6 @@ public class IRSensor {
 		sampler = sensor.getDistanceMode();
     	float[] sample = new float[sampler.sampleSize()];
     	sampler.fetchSample(sample, 0);
-    	LcdPrinter.draw("distance: " + sample[0]);
 		return (int) sample[0];
 	}
 
