@@ -26,12 +26,10 @@ public class Memory {
 		int localSmallest = 100;
 		int localDeg = 0;
 		for (int i = 0; i < allSamples.length; i++) {
-			if (allSamples[i].getNearestDist() < 50) {
-				if (allSamples[i].getNearestDist() < localSmallest) {
-					localSmallest = allSamples[i].getNearestDist();
-					localDeg = allSamples[i].getNearestDegree();
-				}
-			} else if (localSmallest != 100) {
+			if (targetClosest(i, localSmallest)) {
+				localSmallest = allSamples[i].getNearestDist();
+				localDeg = allSamples[i].getNearestDegree();
+			} else if (targetNoLongerInSight(localSmallest)) {
 				targets.add(allSamples[localDeg/5]);
 				localSmallest = 100;
 			}
@@ -41,5 +39,14 @@ public class Memory {
 	public void resetMemory() {
 		allSamples = new IRSample[72];
 		targets = new PriorityQueue<>();
+	}
+	
+	private boolean targetClosest(int i, int localSmallest) {
+		return allSamples[i].getNearestDist() < 50 &&
+			   allSamples[i].getNearestDist() < localSmallest;
+	}
+	
+	private boolean targetNoLongerInSight(int localSmallest) {
+		return localSmallest != 100;
 	}
 }

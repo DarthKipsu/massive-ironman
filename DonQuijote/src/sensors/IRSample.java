@@ -17,6 +17,10 @@ public class IRSample implements Comparable<IRSample>{
 	public int getNearestDist() {
 		return nearestDist;
 	}
+	
+	public void setNearestDist(int distance) {
+		nearestDist = distance;
+	}
 
 	@Override
 	public int compareTo(IRSample sample2) {

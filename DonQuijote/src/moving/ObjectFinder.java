@@ -1,7 +1,5 @@
 package moving;
 
-import donQuijote.LcdPrinter;
-import lejos.hardware.Button;
 import ai.Memory;
 import sensors.IRSample;
 import sensors.IRSensor;
@@ -10,26 +8,27 @@ public class ObjectFinder {
 	
 	private Moving move;
 	private Memory memory;
-	private int currentRot;
+	private int currentDeg;
 	private IRSensor iR;
 	private IRSample nearestTarget;
 	
 	public ObjectFinder(Moving move, Memory memory) {
 		this.move = move;
 		this.memory = memory;
-		currentRot = 0;
+		currentDeg = 0;
 		iR = new IRSensor();
 	}
 	
 	public int findNearestObject() {
-		if (nearestTarget == null) {
-			resetNearest();
-			rotateToFindNearest();
-			memory.analyzeData();
-		}
-		if (rotateTowardsNearest()) {
-			return nearestTarget.getNearestDist();
-		} else return -1;
+		if (nearestTarget == null) findTargets();
+		if (rotateTowardsNearest()) return nearestTarget.getNearestDist();
+		else return -1;
+	}
+	
+	private void findTargets() {
+		resetNearest();
+		rotateToFindNearest();
+		memory.analyzeData();
 	}
 	
 	private void resetNearest() {
@@ -48,29 +47,48 @@ public class ObjectFinder {
 	}
 	
 	private boolean rotateTowardsNearest() {
-		nearestTarget = memory.getDirection();
-		if (nearestTarget == null) {
-			printNoTargetsLeft();
-			return false;
-		}
-		int nearestDeg = nearestTarget.getNearestDegree();
-		
-		if (nearestDeg < currentRot - 180) nearestDeg += 360;
-		if (nearestDeg > currentRot && nearestDeg < currentRot + 180) {
-			move.rotateLeft(nearestDeg - currentRot);
-		} else {
-			if (nearestDeg > currentRot + 180) currentRot -= 360;
-			move.rotateRight(Math.abs(currentRot - nearestDeg));
-		}
-		currentRot = nearestTarget.getNearestDegree();
+		updateNearestTarget();
+		if (nearestTarget == null) return false;
+		rotate();
+		updateCurrentDeg();
+		updateTargetDistance();
 		return true;
 	}
 	
-	private static void printNoTargetsLeft() {
-		Button.LEDPattern(2);
-		LcdPrinter.draw("No targets left!");
-		while (!Button.DOWN.isDown()) continue;
-		Button.LEDPattern(0);
+	private void updateNearestTarget() {
+		nearestTarget = memory.getDirection();
+	}
+	
+	private int setNearestDegrees() {
+		int nearestDeg = nearestTarget.getNearestDegree();
+		if (nearestDeg < currentDeg - 180) nearestDeg += 360;
+		return nearestDeg;
+	}
+	
+	private void rotate() {
+		int nearestDeg = setNearestDegrees();
+		if (targetOnLeftSide(nearestDeg)) {
+			move.rotateLeft(nearestDeg - currentDeg);
+		} else {
+			adjustCurrentDegIfNeeded(nearestDeg);
+			move.rotateRight(Math.abs(currentDeg - nearestDeg));
+		}
+	}
+	
+	private boolean targetOnLeftSide(int nearestDeg) {
+		return nearestDeg > currentDeg && nearestDeg < currentDeg + 180;
+	}
+	
+	private void adjustCurrentDegIfNeeded(int nearestDeg) {
+		if (nearestDeg > currentDeg + 180) currentDeg -= 360;
+	}
+	
+	private void updateCurrentDeg() {
+		currentDeg = nearestTarget.getNearestDegree();
+	}
+	
+	private void updateTargetDistance() {
+		nearestTarget.setNearestDist(iR.measureDistance());
 	}
 
 }

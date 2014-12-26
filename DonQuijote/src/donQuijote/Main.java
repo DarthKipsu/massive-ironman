@@ -2,6 +2,7 @@ package donQuijote;
 
 import ai.Examiner;
 import ai.Memory;
+import lejos.hardware.Button;
 import moving.Moving;
 import moving.ObjectFinder;
 
@@ -17,11 +18,19 @@ public class Main {
 			int distance = objFinder.findNearestObject();
 			if (distance == -1) {
 				move.closeMotors();
+				printNoTargetsLeft();
 				break;
 			} else {
 				examiner.examineTargetAt(distance/2);
 			}
 		}
+	}
+	
+	private static void printNoTargetsLeft() {
+		Button.LEDPattern(2);
+		LcdPrinter.draw("No targets left!");
+		while (!Button.DOWN.isDown()) continue;
+		Button.LEDPattern(0);
 	}
 
 }

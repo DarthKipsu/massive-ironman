@@ -14,7 +14,7 @@ public class Moving {
 	public Moving() {
 		rightMotor = new EV3LargeRegulatedMotor(MotorPort.A);
 		leftMotor = new EV3LargeRegulatedMotor(MotorPort.D);
-		tireSpacing = 22;
+		tireSpacing = 20;
 		travelPerDegree = 14.6;
 	}
 	

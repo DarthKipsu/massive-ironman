@@ -1,11 +1,8 @@
 package sensors;
-import lejos.hardware.BrickFinder;
-import lejos.hardware.Button;
+
 import lejos.hardware.ev3.LocalEV3;
-import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;
-import lejos.utility.Delay;
 
 public class IRSensor {
 	
