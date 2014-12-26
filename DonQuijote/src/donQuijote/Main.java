@@ -22,6 +22,7 @@ public class Main {
 				break;
 			} else {
 				examiner.examineTargetAt(distance/2);
+				move.moveBackward(distance/2);
 			}
 		}
 	}

@@ -13,6 +13,10 @@ public class Memory {
 		resetMemory();
 	}
 	
+	public int getTargetSize() {
+		return targets.size();
+	}
+	
 	public void addValues(int dist, int i) {
 		allSamples[i] = new IRSample(dist, i * 5);
 	}
@@ -26,9 +30,11 @@ public class Memory {
 		int localSmallest = 100;
 		int localDeg = 0;
 		for (int i = 0; i < allSamples.length; i++) {
-			if (targetClosest(i, localSmallest)) {
-				localSmallest = allSamples[i].getNearestDist();
-				localDeg = allSamples[i].getNearestDegree();
+			if (allSamples[i].getNearestDist() < 50) {
+				if (targetClosest(i, localSmallest)) {
+					localSmallest = allSamples[i].getNearestDist();
+					localDeg = allSamples[i].getNearestDegree();
+				}
 			} else if (targetNoLongerInSight(localSmallest)) {
 				targets.add(allSamples[localDeg/5]);
 				localSmallest = 100;
@@ -42,8 +48,7 @@ public class Memory {
 	}
 	
 	private boolean targetClosest(int i, int localSmallest) {
-		return allSamples[i].getNearestDist() < 50 &&
-			   allSamples[i].getNearestDist() < localSmallest;
+		return allSamples[i].getNearestDist() < localSmallest;
 	}
 	
 	private boolean targetNoLongerInSight(int localSmallest) {

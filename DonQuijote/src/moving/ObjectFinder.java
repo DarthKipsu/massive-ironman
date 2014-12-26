@@ -1,5 +1,6 @@
 package moving;
 
+import lejos.hardware.Sound;
 import ai.Memory;
 import sensors.IRSample;
 import sensors.IRSensor;
@@ -21,58 +22,47 @@ public class ObjectFinder {
 	
 	public int findNearestObject() {
 		if (nearestTarget == null) findTargets();
-		if (rotateTowardsNearest()) return nearestTarget.getNearestDist();
-		else return -1;
+		nearestTarget = memory.getDirection();
+		if (nearestTarget == null) return -1;
+		rotateTowardsNearest();
+		return nearestTarget.getNearestDist();
 	}
 	
 	private void findTargets() {
-		resetNearest();
+		memory.resetMemory();
 		rotateToFindNearest();
 		memory.analyzeData();
-	}
-	
-	private void resetNearest() {
-		memory.resetMemory();
+		for (int i=0; i<memory.getTargetSize(); i++) Sound.beep();
 	}
 	
 	private void rotateToFindNearest() {
 		for	(int i = 0; i < 360 / 5; i++) {
 			move.rotateLeft(5);
-			addSampleToMemory(iR.measureDistance(), i);
+			memory.addValues(iR.measureDistance(), i);
 		}
 	}
 	
-	private void addSampleToMemory(int distance, int i) {
-		memory.addValues(distance, i);
-	}
-	
 	private boolean rotateTowardsNearest() {
-		updateNearestTarget();
-		if (nearestTarget == null) return false;
 		rotate();
+		adjustPosition();
 		updateCurrentDeg();
-		updateTargetDistance();
 		return true;
 	}
 	
-	private void updateNearestTarget() {
-		nearestTarget = memory.getDirection();
-	}
-	
-	private int setNearestDegrees() {
-		int nearestDeg = nearestTarget.getNearestDegree();
-		if (nearestDeg < currentDeg - 180) nearestDeg += 360;
-		return nearestDeg;
-	}
-	
 	private void rotate() {
-		int nearestDeg = setNearestDegrees();
+		int nearestDeg = setNearestDegree();
 		if (targetOnLeftSide(nearestDeg)) {
 			move.rotateLeft(nearestDeg - currentDeg);
 		} else {
 			adjustCurrentDegIfNeeded(nearestDeg);
 			move.rotateRight(Math.abs(currentDeg - nearestDeg));
 		}
+	}
+	
+	private int setNearestDegree() {
+		int nearestDeg = nearestTarget.getNearestDegree();
+		if (nearestDeg < currentDeg - 180) nearestDeg += 360;
+		return nearestDeg;
 	}
 	
 	private boolean targetOnLeftSide(int nearestDeg) {
@@ -83,12 +73,23 @@ public class ObjectFinder {
 		if (nearestDeg > currentDeg + 180) currentDeg -= 360;
 	}
 	
+	private void adjustPosition() {
+		int distance = iR.measureDistance();
+		int fix = 3;
+		while (distance >= 50) {
+			rotateFor(fix);
+			distance = iR.measureDistance();
+			fix += 3;
+		}
+		nearestTarget.setNearestDist(iR.measureDistance());
+	}
+	
+	private void rotateFor(int fix) {
+		if (fix % 2 == 0) move.rotateRight(fix);
+		else move.rotateLeft(fix);
+	}
+	
 	private void updateCurrentDeg() {
 		currentDeg = nearestTarget.getNearestDegree();
 	}
-	
-	private void updateTargetDistance() {
-		nearestTarget.setNearestDist(iR.measureDistance());
-	}
-
 }
