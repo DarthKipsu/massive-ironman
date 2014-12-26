@@ -1,48 +1,48 @@
 package moving;
 
+import ai.Memory;
+import sensors.IRSample;
 import sensors.IRSensor;
 
 public class ObjectFinder {
 	
 	private Moving move;
+	private Memory memory;
 	private IRSensor iR;
-	private int nearestDegree;
-	private int nearestDist;
+	private IRSample nearestTarget;
 	
-	public ObjectFinder(Moving move) {
+	public ObjectFinder(Moving move, Memory memory) {
 		this.move = move;
+		this.memory = memory;
 		iR = new IRSensor();
 	}
 	
 	public int findNearestObject() {
 		resetNearest();
 		rotateToFindNearest();
+		memory.analyzeData();
 		rotateTowardsNearest();
-		System.out.println(nearestDegree);
-		return nearestDist;
+		return nearestTarget.getNearestDist();
 	}
 	
 	private void resetNearest() {
-		nearestDegree = 0;
-		nearestDist = 100;
+		memory.resetMemory();
 	}
 	
 	private void rotateToFindNearest() {
 		for	(int i = 0; i < 360 / 5; i++) {
 			move.rotateLeft(5);
-			updateNEarestIfNeeded(iR.measureDistance(), i);
+			addSampleToMemory(iR.measureDistance(), i);
 		}
 	}
 	
-	private void updateNEarestIfNeeded(int distance, int i) {
-		if (distance < nearestDist) {
-			nearestDist = distance;
-			nearestDegree = i * 5;
-		}
+	private void addSampleToMemory(int distance, int i) {
+		memory.addValues(distance, i);
 	}
 	
 	private void rotateTowardsNearest() {
-		move.rotateLeft(nearestDegree);
+		nearestTarget = memory.getDirection();
+		move.rotateLeft(nearestTarget.getNearestDegree());
 	}
 
 }
