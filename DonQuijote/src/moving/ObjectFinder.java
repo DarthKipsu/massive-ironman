@@ -1,5 +1,7 @@
 package moving;
 
+import donQuijote.LcdPrinter;
+import lejos.hardware.Button;
 import ai.Memory;
 import sensors.IRSample;
 import sensors.IRSensor;
@@ -8,14 +10,14 @@ public class ObjectFinder {
 	
 	private Moving move;
 	private Memory memory;
-	private int currentRotation;
+	private int currentRot;
 	private IRSensor iR;
 	private IRSample nearestTarget;
 	
 	public ObjectFinder(Moving move, Memory memory) {
 		this.move = move;
 		this.memory = memory;
-		currentRotation = 0;
+		currentRot = 0;
 		iR = new IRSensor();
 	}
 	
@@ -25,8 +27,9 @@ public class ObjectFinder {
 			rotateToFindNearest();
 			memory.analyzeData();
 		}
-		rotateTowardsNearest();
-		return nearestTarget.getNearestDist();
+		if (rotateTowardsNearest()) {
+			return nearestTarget.getNearestDist();
+		} else return -1;
 	}
 	
 	private void resetNearest() {
@@ -44,16 +47,30 @@ public class ObjectFinder {
 		memory.addValues(distance, i);
 	}
 	
-	private void rotateTowardsNearest() {
+	private boolean rotateTowardsNearest() {
 		nearestTarget = memory.getDirection();
-		int rotation = nearestTarget.getNearestDegree() - currentRotation;
-		if (rotation > 0 && rotation < 180) {
-			move.rotateLeft(rotation);
-		} else if (rotation > 0){
-			move.rotateRight(360 - rotation);
-		} else {
-			move.rotateRight(rotation);
+		if (nearestTarget == null) {
+			printNoTargetsLeft();
+			return false;
 		}
+		int nearestDeg = nearestTarget.getNearestDegree();
+		
+		if (nearestDeg < currentRot - 180) nearestDeg += 360;
+		if (nearestDeg > currentRot && nearestDeg < currentRot + 180) {
+			move.rotateLeft(nearestDeg - currentRot);
+		} else {
+			if (nearestDeg > currentRot + 180) currentRot -= 360;
+			move.rotateRight(Math.abs(currentRot - nearestDeg));
+		}
+		currentRot = nearestTarget.getNearestDegree();
+		return true;
+	}
+	
+	private static void printNoTargetsLeft() {
+		Button.LEDPattern(2);
+		LcdPrinter.draw("No targets left!");
+		while (!Button.DOWN.isDown()) continue;
+		Button.LEDPattern(0);
 	}
 
 }

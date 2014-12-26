@@ -13,9 +13,15 @@ public class Main {
 		ObjectFinder objFinder = new ObjectFinder(move, memory);
 		Examiner examiner = new Examiner(move);
 		
-		int distance = objFinder.findNearestObject();
-		examiner.examineTargetAt(distance/2);
-		move.closeMotors();
+		while (true) {
+			int distance = objFinder.findNearestObject();
+			if (distance == -1) {
+				move.closeMotors();
+				break;
+			} else {
+				examiner.examineTargetAt(distance/2);
+			}
+		}
 	}
 
 }
