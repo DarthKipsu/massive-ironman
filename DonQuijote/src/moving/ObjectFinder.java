@@ -1,17 +1,22 @@
 package moving;
 
 import sensors.IRSensor;
+import sensors.IRSensorImpl;
 
 public class ObjectFinder {
 	
-	private Moving move;
+	private Movable move;
 	private int currentDeg;
 	private IRSensor iR;
 	
-	public ObjectFinder(Moving move) {
+	public ObjectFinder(Movable move, IRSensor irs) {
 		this.move = move;
 		currentDeg = 0;
-		iR = new IRSensor();
+		iR = irs;
+	}
+	
+	public ObjectFinder(Movable move) {
+		this(move, new IRSensorImpl());
 	}
 	
 	public int findNearestObject() {

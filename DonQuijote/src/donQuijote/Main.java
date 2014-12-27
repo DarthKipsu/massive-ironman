@@ -2,26 +2,27 @@ package donQuijote;
 
 import ai.Examiner;
 import lejos.hardware.Button;
-import moving.Moving;
+import moving.Motors;
+import moving.Movable;
 import moving.ObjectFinder;
 
 public class Main {
 	
-	private static Moving move;
+	private static Movable motors;
 	private static ObjectFinder objFinder;
 	private static Examiner examiner;
 
 	public static void main(String[] args) {
 		initiateClasses();
 		findAndExamineTargets();
-		move.closeMotors();
+		motors.closeMotors();
 		printNoTargetsLeft();
 	}
 	
 	private static void initiateClasses() {
-		move = new Moving();
-		objFinder = new ObjectFinder(move);
-		examiner = new Examiner(move, objFinder);
+		motors = new Motors();
+		objFinder = new ObjectFinder(motors);
+		examiner = new Examiner(motors, objFinder);
 	}
 	
 	private static void findAndExamineTargets() {

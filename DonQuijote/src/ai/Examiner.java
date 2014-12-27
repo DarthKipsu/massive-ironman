@@ -1,25 +1,31 @@
 package ai;
 
 import sensors.ColorSensor;
+import sensors.ColorSensorImpl;
 import lejos.hardware.Sound;
 import moving.Head;
-import moving.Moving;
+import moving.HeadImpl;
+import moving.Movable;
 import moving.ObjectFinder;
 
 public class Examiner {
 	
-	private Moving move;
+	private Movable move;
 	private ObjectFinder objFind;
 	private ColorSensor color;
 	private Head head;
 	private int distance;
 	private int colorCode;
 	
-	public Examiner(Moving move, ObjectFinder objFind) {
+	public Examiner(Movable move, ObjectFinder of, ColorSensor cs, Head head) {
 		this.move = move;
-		this.objFind = objFind;
-		color = new ColorSensor();
-		head = new Head();
+		this.objFind = of;
+		this.head = head;
+		color = cs;
+	}
+	
+	public Examiner(Movable move, ObjectFinder of) {
+		this(move, of, new ColorSensorImpl(), new HeadImpl());
 	}
 	
 	public void examineTargetAt() {
