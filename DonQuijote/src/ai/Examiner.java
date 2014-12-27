@@ -24,19 +24,29 @@ public class Examiner {
 		head.prolongToDefault();
 		color.turnOnFloodlight();
 		int distance = 0;
-		while (objFind.measureDistance() > 8) {
+		while (objFind.measureDistance() > 8 && distance < 50) {
+			while (objFind.measureDistance() > 50) move.rotateLeft(2);
 			move.moveForward(1);
 			distance++;
 		}
-		System.out.println("Color: " + color.measureColor());
-		reactToColor(color.measureColor());
+		int colorCode = color.measureColor();
+		while ((colorCode == -1 || colorCode > 7) && objFind.measureDistance() < 20) {
+			move.rotateLeft(1);
+			colorCode = color.measureColor();
+		}
+		if (colorCode == -1 || colorCode > 7) move.rotateRight(4);
+		while ((colorCode == -1 || colorCode > 7) && objFind.measureDistance() < 20) {
+			move.rotateRight(1);
+			colorCode = color.measureColor();
+		}
+		reactToColor(colorCode);
 		color.turnOffFloodlight();
 		head.contractFully();
 		move.moveBackward(distance);
 	}
 	
-	private void reactToColor(int color) {
-		switch (color) {
+	private void reactToColor(int colorCode) {
+		switch (colorCode) {
 		case 0:
 			System.out.println("No color detected");
 			break;
@@ -64,6 +74,7 @@ public class Examiner {
 
 		default:
 			Sound.buzz();
+			System.out.println(colorCode);
 			break;
 		}
 	}
