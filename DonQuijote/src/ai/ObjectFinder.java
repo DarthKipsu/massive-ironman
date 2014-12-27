@@ -1,5 +1,6 @@
-package moving;
+package ai;
 
+import motors.Movable;
 import sensors.IRSensor;
 import sensors.IRSensorImpl;
 
@@ -19,17 +20,18 @@ public class ObjectFinder {
 		this(move, new IRSensorImpl());
 	}
 	
-	public int findNearestObject() {
-		return rotateToFindNearest();
-	}
-	
 	public int measureDistance() {
 		return iR.measureDistance();
 	}
 	
+	public int findNearestObject() {
+		return rotateToFindNearest();
+	}
+	
 	private int rotateToFindNearest() {
 		if (currentDeg == 0) {
-			if (iR.measureDistance() < 50) return iR.measureDistance();
+			int distance = iR.measureDistance();
+			if (distance < 50) return distance;
 		} else {
 			moveAwayFromCurrentTarget();
 		}

@@ -1,4 +1,4 @@
-package moving;
+package motors;
 
 public interface Movable {
 

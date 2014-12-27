@@ -1,10 +1,10 @@
 package donQuijote;
 
 import ai.Examiner;
+import ai.ObjectFinder;
 import lejos.hardware.Button;
-import moving.Motors;
-import moving.Movable;
-import moving.ObjectFinder;
+import motors.Motors;
+import motors.Movable;
 
 public class Main {
 	
@@ -27,7 +27,7 @@ public class Main {
 	
 	private static void findAndExamineTargets() {
 		while (objFinder.findNearestObject() != -1) {
-			examiner.examineTargetAt();
+			examiner.examineTarget();
 		}
 	}
 	

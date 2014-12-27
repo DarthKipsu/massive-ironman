@@ -3,10 +3,9 @@ package ai;
 import sensors.ColorSensor;
 import sensors.ColorSensorImpl;
 import lejos.hardware.Sound;
-import moving.Head;
-import moving.HeadImpl;
-import moving.Movable;
-import moving.ObjectFinder;
+import motors.Head;
+import motors.HeadImpl;
+import motors.Movable;
 
 public class Examiner {
 	
@@ -28,7 +27,7 @@ public class Examiner {
 		this(move, of, new ColorSensorImpl(), new HeadImpl());
 	}
 	
-	public void examineTargetAt() {
+	public void examineTarget() {
 		activateHead();
 		distance = 0;
 		advanceTowardsTarget();
@@ -46,7 +45,6 @@ public class Examiner {
 	
 	private void advanceTowardsTarget() {
 		while (objFind.measureDistance() >= 12 && distance < 50) {
-			while (objFind.measureDistance() > 50) move.rotateLeft(2);
 			int movement = (int)Math.sqrt(objFind.measureDistance());
 			move.moveForward(movement);
 			distance += movement;

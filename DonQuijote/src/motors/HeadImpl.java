@@ -1,4 +1,4 @@
-package moving;
+package motors;
 
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
