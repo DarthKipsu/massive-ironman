@@ -12,6 +12,8 @@ public class Examiner {
 	private ObjectFinder objFind;
 	private ColorSensor color;
 	private Head head;
+	private int distance;
+	private int colorCode;
 	
 	public Examiner(Moving move, ObjectFinder objFind) {
 		this.move = move;
@@ -21,28 +23,49 @@ public class Examiner {
 	}
 	
 	public void examineTargetAt() {
+		activateHead();
+		distance = 0;
+		advanceTowardsTarget();
+		colorCode = color.measureColor();
+		repositionToDetectColor();
+		reactToColor(colorCode);
+		deactivateHead();
+		move.moveBackward(distance);
+	}
+	
+	private void activateHead() {
 		head.prolongToDefault();
 		color.turnOnFloodlight();
-		int distance = 0;
-		while (objFind.measureDistance() > 8 && distance < 50) {
+	}
+	
+	private void advanceTowardsTarget() {
+		while (objFind.measureDistance() >= 12 && distance < 50) {
 			while (objFind.measureDistance() > 50) move.rotateLeft(2);
-			move.moveForward(1);
-			distance++;
+			int movement = (int)Math.sqrt(objFind.measureDistance());
+			move.moveForward(movement);
+			distance += movement;
 		}
-		int colorCode = color.measureColor();
-		while ((colorCode == -1 || colorCode > 7) && objFind.measureDistance() < 20) {
-			move.rotateLeft(1);
+	}
+	
+	private void repositionToDetectColor() {
+		rotateToDirection(1);
+		if (colorNotDetected()) move.rotateRight(4);
+		rotateToDirection(-1);
+	}
+	
+	private void rotateToDirection(int direction) {
+		while (colorNotDetected() && objectStillInSight()) {
+			move.rotateLeft(direction);
 			colorCode = color.measureColor();
 		}
-		if (colorCode == -1 || colorCode > 7) move.rotateRight(4);
-		while ((colorCode == -1 || colorCode > 7) && objFind.measureDistance() < 20) {
-			move.rotateRight(1);
-			colorCode = color.measureColor();
-		}
-		reactToColor(colorCode);
-		color.turnOffFloodlight();
-		head.contractFully();
-		move.moveBackward(distance);
+	}
+	
+	private boolean colorNotDetected() {
+		return (colorCode == -1 || colorCode > 7);
+	}
+	
+	private boolean objectStillInSight() {
+		return objFind.measureDistance() < 20;
 	}
 	
 	private void reactToColor(int colorCode) {
@@ -71,12 +94,16 @@ public class Examiner {
 		case 7:
 			System.out.println("Brown teddy");
 			break;
-
 		default:
 			Sound.buzz();
 			System.out.println(colorCode);
 			break;
 		}
+	}
+	
+	private void deactivateHead() {
+		color.turnOffFloodlight();
+		head.contractFully();
 	}
 
 }

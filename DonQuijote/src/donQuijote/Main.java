@@ -6,17 +6,28 @@ import moving.Moving;
 import moving.ObjectFinder;
 
 public class Main {
+	
+	private static Moving move;
+	private static ObjectFinder objFinder;
+	private static Examiner examiner;
 
 	public static void main(String[] args) {
-		Moving move = new Moving();
-		ObjectFinder objFinder = new ObjectFinder(move);
-		Examiner examiner = new Examiner(move, objFinder);
-		
+		initiateClasses();
+		findAndExamineTargets();
+		move.closeMotors();
+		printNoTargetsLeft();
+	}
+	
+	private static void initiateClasses() {
+		move = new Moving();
+		objFinder = new ObjectFinder(move);
+		examiner = new Examiner(move, objFinder);
+	}
+	
+	private static void findAndExamineTargets() {
 		while (objFinder.findNearestObject() != -1) {
 			examiner.examineTargetAt();
 		}
-		move.closeMotors();
-		printNoTargetsLeft();
 	}
 	
 	private static void printNoTargetsLeft() {
