@@ -1,7 +1,6 @@
 package donQuijote;
 
 import ai.Examiner;
-import ai.Memory;
 import lejos.hardware.Button;
 import moving.Moving;
 import moving.ObjectFinder;
@@ -10,21 +9,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		Moving move = new Moving();
-		Memory memory = new Memory();
-		ObjectFinder objFinder = new ObjectFinder(move, memory);
-		Examiner examiner = new Examiner(move);
+		ObjectFinder objFinder = new ObjectFinder(move);
+		Examiner examiner = new Examiner(move, objFinder);
 		
-		while (true) {
-			int distance = objFinder.findNearestObject();
-			if (distance == -1) {
-				move.closeMotors();
-				printNoTargetsLeft();
-				break;
-			} else {
-				examiner.examineTargetAt(distance/2);
-				move.moveBackward(distance/2);
-			}
+		while (objFinder.findNearestObject() != -1) {
+			examiner.examineTargetAt();
 		}
+		move.closeMotors();
+		printNoTargetsLeft();
 	}
 	
 	private static void printNoTargetsLeft() {

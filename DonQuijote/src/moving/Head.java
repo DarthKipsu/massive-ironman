@@ -21,7 +21,7 @@ public class Head {
 	}
 	
 	public void contractFully() {
-		prolongHead(0 - position);
+		prolongHead(-5 - position);
 		position = 0;
 	}
 	
