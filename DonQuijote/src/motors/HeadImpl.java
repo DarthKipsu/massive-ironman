@@ -33,12 +33,11 @@ public class HeadImpl implements Head {
 
 	@Override
 	public void attack() {
-		motor.setSpeed(720);
+		motor.setSpeed(550);
 		prolongHead(60 - position);
 		position = 60;
 		contractFully();
 		motor.setSpeed(360);
-		prolongHead(-15);
 	}
 
 }
