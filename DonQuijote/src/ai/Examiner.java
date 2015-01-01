@@ -2,6 +2,7 @@ package ai;
 
 import sensors.ColorSensor;
 import sensors.ColorSensorImpl;
+import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import motors.Head;
 import motors.HeadImpl;
@@ -29,6 +30,7 @@ public class Examiner {
 	
 	public void examineTarget() {
 		activateHead();
+		move.rotateLeft(4);
 		distance = 0;
 		advanceTowardsTarget();
 		colorCode = color.measureColor();
@@ -75,34 +77,44 @@ public class Examiner {
 	private void reactToColor(int colorCode) {
 		switch (colorCode) {
 		case 0:
-			System.out.println("No color detected");
+			System.out.println("No color");
 			break;
 		case 1:
-			System.out.println("Black tower");
+			System.out.println("Black");
 			break;
 		case 2:
-			System.out.println("Blue skies");
+			System.out.println("Blue");
 			break;
 		case 3:
-			System.out.println("The other side of the fence");
+			System.out.println("Green");
 			break;
 		case 4:
-			System.out.println("Yellowish");
+			System.out.println("Yellow");
 			break;
 		case 5:
-			System.out.println("Red alert!");
+			System.out.println("Red");
 			break;
 		case 6:
-			System.out.println("White flag");
+			System.out.println("White");
 			break;
 		case 7:
-			System.out.println("Brown teddy");
+			System.out.println("Brown");
+			attackWithHead();
 			break;
 		default:
 			Sound.buzz();
-			System.out.println(colorCode);
+			System.out.println("Color " + colorCode + " not known");
 			break;
 		}
+	}
+	
+	private void attackWithHead() {
+		Button.LEDPattern(2);
+		head.contractFully();
+		move.moveForward(3);
+		head.attack();
+		move.moveBackward(3);
+		Button.LEDPattern(0);
 	}
 	
 	private void deactivateHead() {

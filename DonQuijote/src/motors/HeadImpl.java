@@ -31,4 +31,14 @@ public class HeadImpl implements Head {
 		motor.rotate((int)(rotFormm * mm));
 	}
 
+	@Override
+	public void attack() {
+		motor.setSpeed(720);
+		prolongHead(60 - position);
+		position = 60;
+		contractFully();
+		motor.setSpeed(360);
+		prolongHead(-15);
+	}
+
 }

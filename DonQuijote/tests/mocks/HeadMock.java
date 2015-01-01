@@ -12,4 +12,8 @@ public class HeadMock implements Head {
 	public void contractFully() {
 	}
 
+	@Override
+	public void attack() {		
+	}
+
 }
