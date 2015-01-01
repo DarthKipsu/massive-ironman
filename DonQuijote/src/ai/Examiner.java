@@ -95,10 +95,11 @@ public class Examiner {
 			System.out.println("Red");
 			break;
 		case 6:
-			System.out.println("White");
+			System.out.println("White: ignore");
+			ignoreTarget();
 			break;
 		case 7:
-			System.out.println("Brown");
+			System.out.println("Brown: attack");
 			attackWithHead();
 			break;
 		default:
@@ -106,6 +107,10 @@ public class Examiner {
 			System.out.println("Color " + colorCode + " not known");
 			break;
 		}
+	}
+	
+	private void ignoreTarget() {
+		head.contractFully();
 	}
 	
 	private void attackWithHead() {
