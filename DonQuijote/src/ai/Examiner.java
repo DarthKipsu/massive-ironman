@@ -84,15 +84,18 @@ public class Examiner {
 			break;
 		case 2:
 			System.out.println("Blue");
+			attackFromRightSide();
 			break;
 		case 3:
 			System.out.println("Green");
+			shiver();
 			break;
 		case 4:
 			System.out.println("Yellow");
 			break;
 		case 5:
-			System.out.println("Red");
+			System.out.println("Red: attack");
+			attackWithHead();
 			break;
 		case 6:
 			System.out.println("White: ignore");
@@ -109,8 +112,24 @@ public class Examiner {
 		}
 	}
 	
-	private void ignoreTarget() {
+	private void attackFromRightSide() {
 		head.contractFully();
+		move.rotateRight(20);
+		move.moveForward(5);
+		head.prolongToDefault();
+		move.rotateLeft(40);
+		move.moveBackward(5);
+		move.rotateRight(20);
+	}
+	
+	private void shiver() {
+		head.contractFully();
+		move.moveBackward(distance / 2);
+		distance /= 2;
+		move.rotateLeft(4);
+		move.rotateRight(8);
+		move.rotateLeft(8);
+		move.rotateRight(4);
 	}
 	
 	private void attackWithHead() {
@@ -120,6 +139,10 @@ public class Examiner {
 		head.attack();
 		move.moveBackward(3);
 		Button.LEDPattern(0);
+	}
+	
+	private void ignoreTarget() {
+		head.contractFully();
 	}
 	
 	private void deactivateHead() {
