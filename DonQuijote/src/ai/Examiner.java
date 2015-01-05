@@ -83,15 +83,16 @@ public class Examiner {
 			System.out.println("Black");
 			break;
 		case 2:
-			System.out.println("Blue");
+			System.out.println("Blue: attack from right");
 			attackFromRightSide();
 			break;
 		case 3:
-			System.out.println("Green");
-			shiver();
+			System.out.println("Green: ram");
+			ram();
 			break;
 		case 4:
-			System.out.println("Yellow");
+			System.out.println("Yellow: shiver");
+			shiver();
 			break;
 		case 5:
 			System.out.println("Red: attack");
@@ -130,6 +131,11 @@ public class Examiner {
 		move.rotateRight(8);
 		move.rotateLeft(8);
 		move.rotateRight(4);
+	}
+	
+	private void ram() {
+		move.moveForward(20);
+		distance += 20;
 	}
 	
 	private void attackWithHead() {
