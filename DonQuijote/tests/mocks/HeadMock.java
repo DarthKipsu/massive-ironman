@@ -16,4 +16,8 @@ public class HeadMock implements Head {
 	public void attack() {		
 	}
 
+	@Override
+	public void prolongToSideAttack() {		
+	}
+
 }

@@ -22,6 +22,12 @@ public class HeadImpl implements Head {
 	}
 	
 	@Override
+	public void prolongToSideAttack() {
+		prolongHead(45 - position);
+		position = 45;
+	}
+	
+	@Override
 	public void contractFully() {
 		prolongHead(-5 - position);
 		position = 0;

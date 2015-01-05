@@ -77,7 +77,8 @@ public class Examiner {
 	private void reactToColor(int colorCode) {
 		switch (colorCode) {
 		case 0:
-			System.out.println("No color");
+			System.out.println("No color: full circle");
+			attackWithFulCircle();
 			break;
 		case 1:
 			System.out.println("Black");
@@ -113,11 +114,21 @@ public class Examiner {
 		}
 	}
 	
+	private void attackWithFulCircle() {
+		head.contractFully();
+		move.rotateLeft(20);
+		move.moveForward(5);
+		distance += 5;
+		head.prolongToSideAttack();
+		move.rotateRight(360);
+		move.rotateRight(30);
+	}
+	
 	private void attackFromRightSide() {
 		head.contractFully();
 		move.rotateRight(20);
 		move.moveForward(5);
-		head.prolongToDefault();
+		head.prolongToSideAttack();
 		move.rotateLeft(40);
 		move.moveBackward(5);
 		move.rotateRight(20);
