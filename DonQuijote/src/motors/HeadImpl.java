@@ -17,31 +17,29 @@ public class HeadImpl implements Head {
 	
 	@Override
 	public void prolongToDefault() {
-		prolongHead(30 - position);
-		position = 30;
+		prolongHead(30);
 	}
 	
 	@Override
 	public void prolongToSideAttack() {
-		prolongHead(45 - position);
-		position = 45;
+		prolongHead(45);
 	}
 	
 	@Override
 	public void contractFully() {
-		prolongHead(-5 - position);
+		prolongHead(-5);
 		position = 0;
 	}
 	
 	private void prolongHead(int mm) {
-		motor.rotate((int)(rotFormm * mm));
+		motor.rotate((int)(rotFormm * (mm - position)));
+		position = mm;
 	}
 
 	@Override
 	public void attack() {
 		motor.setSpeed(550);
-		prolongHead(60 - position);
-		position = 60;
+		prolongHead(60);
 		contractFully();
 		motor.setSpeed(360);
 	}

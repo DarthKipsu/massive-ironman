@@ -26,8 +26,7 @@ public class Motors implements Movable {
 
 	@Override
 	public void moveBackward(int centimeters) {
-		int movement = (int)Math.round(centimeters / travelPerDegree * 360.0);
-		move(-movement);
+		moveForward(-centimeters);
 	}
 	
 	@Override
@@ -38,8 +37,7 @@ public class Motors implements Movable {
 	
 	@Override
 	public void rotateRight(int degrees) {
-		int rotation = (int)Math.round(tireSpacing * Math.PI / (360 / degrees) / travelPerDegree * 360.0);
-		rotate(-rotation);
+		rotateLeft(-degrees);
 	}
 	
 	@Override

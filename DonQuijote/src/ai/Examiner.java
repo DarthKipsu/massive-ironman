@@ -120,32 +120,28 @@ public class Examiner {
 	}
 	
 	private void attackWithFulCircle() {
-		head.contractFully();
-		move.rotateLeft(20);
-		move.moveForward(5);
-		distance += 5;
-		head.prolongToSideAttack();
+		beginAttackFrom(20);
 		move.rotateRight(360);
 		move.rotateRight(30);
 	}
 	
-	private void attackFromLeftSide() {
+	private void beginAttackFrom(int rotation) {
 		head.contractFully();
-		move.rotateLeft(20);
+		move.rotateLeft(rotation);
 		move.moveForward(5);
+		distance += 5;
 		head.prolongToSideAttack();
+	}
+	
+	private void attackFromLeftSide() {
+		beginAttackFrom(20);
 		move.rotateRight(40);
-		move.moveBackward(5);
 		move.rotateLeft(20);
 	}
 	
 	private void attackFromRightSide() {
-		head.contractFully();
-		move.rotateRight(20);
-		move.moveForward(5);
-		head.prolongToSideAttack();
+		beginAttackFrom(-20);
 		move.rotateLeft(40);
-		move.moveBackward(5);
 		move.rotateRight(20);
 	}
 	
