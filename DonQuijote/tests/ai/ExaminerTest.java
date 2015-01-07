@@ -30,7 +30,8 @@ public class ExaminerTest {
 		addSamples(measurements, 9);
 		irs.setMeasurements(measurements);
 		ex.examineTarget();
-		assertEquals(0, move.getMovementForward());
+		// + 5 comes from reaction to target, testing only movement before it
+		assertEquals(0 + 5, move.getMovementForward());
 	}
 	
 	@Test
@@ -39,7 +40,8 @@ public class ExaminerTest {
 		addSamples(measurements, 12, 12, 9);
 		irs.setMeasurements(measurements);
 		ex.examineTarget();
-		assertEquals(3, move.getMovementForward());
+		// + 5 comes from reaction to target, testing only movement before it
+		assertEquals(3 + 5, move.getMovementForward());
 	}
 	
 	@Test
@@ -48,7 +50,8 @@ public class ExaminerTest {
 		addSamples(measurements, 16, 16, 12, 12, 9);
 		irs.setMeasurements(measurements);
 		ex.examineTarget();
-		assertEquals(7, move.getMovementForward());
+		// + 5 comes from reaction to target, testing only movement before it
+		assertEquals(7 + 5, move.getMovementForward());
 	}
 	
 	@Test
@@ -57,7 +60,8 @@ public class ExaminerTest {
 		addSamples(measurements, 16, 16, 12, 12, 9);
 		irs.setMeasurements(measurements);
 		ex.examineTarget();
-		assertEquals(7, move.getMovementBackward());
+		// + 5 comes from reaction to target, testing only movement before it
+		assertEquals(7 + 5, move.getMovementBackward());
 	}
 	
 	@Test
@@ -66,10 +70,11 @@ public class ExaminerTest {
 		addSamples(measurements, 9, 9);
 		irs.setMeasurements(measurements);
 		measurements = createEmptyColorArray();
-		addSamples(measurements, -1, 0);
+		addSamples(measurements, -1, 3);
 		cs.setMeasurements(measurements);
 		ex.examineTarget();
-		assertEquals(1, move.getRotatedLeft(), 0.1);
+		// + 4 comes from initial rotation closer to the center of the target
+		assertEquals(1 + 4, move.getRotatedLeft(), 0.1);
 	}
 	
 	@Test
@@ -78,10 +83,11 @@ public class ExaminerTest {
 		addSamples(measurements, 9, 9, 9, 9);
 		irs.setMeasurements(measurements);
 		measurements = createEmptyColorArray();
-		addSamples(measurements, -1, -1, -1, 0);
+		addSamples(measurements, -1, -1, -1, 3);
 		cs.setMeasurements(measurements);
 		ex.examineTarget();
-		assertEquals(3, move.getRotatedLeft(), 0.1);
+		// + 4 comes from initial rotation closer to the center of the target
+		assertEquals(3 + 4, move.getRotatedLeft(), 0.1);
 	}
 	
 	@Test
@@ -90,10 +96,11 @@ public class ExaminerTest {
 		addSamples(measurements, 9, 9, 9, 100, 9);
 		irs.setMeasurements(measurements);
 		measurements = createEmptyColorArray();
-		addSamples(measurements, -1, -1, -1, 0, 0);
+		addSamples(measurements, -1, -1, -1, 3, 3);
 		cs.setMeasurements(measurements);
 		ex.examineTarget();
-		assertEquals(1, move.getRotatedLeft(), 0.1);
+		// + 4 comes from initial rotation closer to the center of the target:w
+		assertEquals(1 + 4, move.getRotatedLeft(), 0.1);
 		assertEquals(4, move.getRotatedRight(), 0.1);
 	}
 	
