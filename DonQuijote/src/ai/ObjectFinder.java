@@ -25,23 +25,22 @@ public class ObjectFinder {
 	}
 	
 	public int findNearestObject() {
-		return rotateToFindNearest();
-	}
-	
-	private int rotateToFindNearest() {
-		if (currentDeg == 0) {
+		if (atStartingLocation()) {
 			int distance = iR.measureDistance();
 			if (distance < 50) return distance;
 		} else {
-			moveAwayFromCurrentTarget();
+			rotateUntilCurrentTargetNoLongerInSight();
 		}
 		return distanceToNextTarget();
 	}
 	
-	private void moveAwayFromCurrentTarget() {
+	private boolean atStartingLocation() {
+		return currentDeg == 0;
+	}
+	
+	private void rotateUntilCurrentTargetNoLongerInSight() {
 		while (iR.measureDistance() < 50) {
-			move.rotateLeft(5);
-			currentDeg += 5;
+			move5degrees();
 		}
 	}
 	
