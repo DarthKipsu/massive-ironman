@@ -30,19 +30,22 @@ public class Examiner {
 	
 	public void examineTarget() {
 		activateHead();
-		move.rotateLeft(4);
-		distance = 0;
+		adjustLocationBeforeExamining();
 		advanceTowardsTarget();
-		colorCode = color.measureColor();
 		repositionToDetectColor();
-		reactToColor(colorCode);
+		reactToColor();
 		deactivateHead();
-		move.moveBackward(distance);
+		moveBackToWhereYouStartedFrom();
 	}
 	
 	private void activateHead() {
 		head.prolongToDefault();
 		color.turnOnFloodlight();
+	}
+	
+	private void adjustLocationBeforeExamining() {
+		move.rotateLeft(4);
+		distance = 0;
 	}
 	
 	private void advanceTowardsTarget() {
@@ -54,6 +57,7 @@ public class Examiner {
 	}
 	
 	private void repositionToDetectColor() {
+		colorCode = color.measureColor();
 		rotateToDirection(1);
 		if (colorNotDetected()) move.rotateRight(4);
 		rotateToDirection(-1);
@@ -74,14 +78,15 @@ public class Examiner {
 		return objFind.measureDistance() < 20;
 	}
 	
-	private void reactToColor(int colorCode) {
+	private void reactToColor() {
 		switch (colorCode) {
 		case 0:
 			System.out.println("No color: full circle");
 			attackWithFulCircle();
 			break;
 		case 1:
-			System.out.println("Black");
+			System.out.println("Black: attack from left");
+			attackFromLeftSide();
 			break;
 		case 2:
 			System.out.println("Blue: attack from right");
@@ -108,8 +113,8 @@ public class Examiner {
 			attackWithHead();
 			break;
 		default:
-			Sound.buzz();
 			System.out.println("Color " + colorCode + " not known");
+			Sound.buzz();
 			break;
 		}
 	}
@@ -122,6 +127,16 @@ public class Examiner {
 		head.prolongToSideAttack();
 		move.rotateRight(360);
 		move.rotateRight(30);
+	}
+	
+	private void attackFromLeftSide() {
+		head.contractFully();
+		move.rotateLeft(20);
+		move.moveForward(5);
+		head.prolongToSideAttack();
+		move.rotateRight(40);
+		move.moveBackward(5);
+		move.rotateLeft(20);
 	}
 	
 	private void attackFromRightSide() {
@@ -165,6 +180,10 @@ public class Examiner {
 	private void deactivateHead() {
 		color.turnOffFloodlight();
 		head.contractFully();
+	}
+	
+	private void moveBackToWhereYouStartedFrom() {
+		move.moveBackward(distance);
 	}
 
 }
