@@ -2,122 +2,122 @@
 
 Aloita rakentamalla moottorien kiinnikkeet. Oikean puoleiseen moottoriin tulee pallo, johon kiinnitetään myöhemmin kuminauha.
 
-![Rakennusohje](/ohje01.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje01.jpg)
 
-![Rakennusohje](/ohje02.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje02.jpg)
 
-![Rakennusohje](/ohje03.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje03.jpg)
 
 Seuraavaksi tehdään robotin ulospäin vedettävän pään kisko.
 
-![Rakennusohje](/ohje04.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje04.jpg)
 
-![Rakennusohje](/ohje05.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje05.jpg)
 
-![Rakennusohje](/ohje06.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje06.jpg)
 
-![Rakennusohje](/ohje07.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje07.jpg)
 
-![Rakennusohje](/ohje08.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje08.jpg)
 
 Kiinnitä kisko moottorien väliin ja aloita päätä liikuttavan rattaiston rakentaminen.
 
-![Rakennusohje](/ohje09.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje09.jpg)
 
-![Rakennusohje](/ohje10.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje10.jpg)
 
-![Rakennusohje](/ohje11.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje11.jpg)
 
 Tukevoitetaan rakennetta ja lisätään kiinnikkeet ohjaus brickille:
 
-![Rakennusohje](/ohje12.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje12.jpg)
 
-![Rakennusohje](/ohje13.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje13.jpg)
 
-![Rakennusohje](/ohje14.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje14.jpg)
 
-![Rakennusohje](/ohje15.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje15.jpg)
 
-![Rakennusohje](/ohje16.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje16.jpg)
 
-![Rakennusohje](/ohje17.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje17.jpg)
 
 Ennen ohjaus brickin kiinnitystä tehdään robotin pää. Päähän tulee IR sensori ja värisensori:
 
-![Rakennusohje](/ohje18.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje18.jpg)
 
-![Rakennusohje](/ohje19.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje19.jpg)
 
 Kiinnitä värisensoriin tässä välissä 35cm kaapeli.
 
-![Rakennusohje](/ohje20.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje20.jpg)
 
-![Rakennusohje](/ohje21.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje21.jpg)
 
 Lisää myös IR sensorille 35cm kaapeli ja lisää kiinnike joka nostaa kaapelien lähtökohdan ylemmäs, jottei se jää myöhemmin rattaiden väliin.
 
-![Rakennusohje](/ohje22.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje22.jpg)
 
 Kiinnitä pää suoraan, jonka päälle on lisätty 4 kpl rattaiden liikuttamiseen tarkoitettuja palikoita:
 
-![Rakennusohje](/ohje23.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje23.jpg)
 
-![Rakennusohje](/ohje24.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje24.jpg)
 
 Rakennetaan pään kaapeleille tukipala, jotta kaapelit ei jää mutkalle robotin sisään.
 
-![Rakennusohje](/ohje25.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje25.jpg)
 
 Työnnä pää kiskolle ja varmista että kaapelit pääsee vapaasti liikkumaan päätä liikuttaessa.
 
-![Rakennusohje](/ohje26.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje26.jpg)
 
 Kiinnitä moottoreihin 25cm kaapelit. Kiinnitetään ohjaus brikki seuraavaksi:
 
-![Rakennusohje](/ohje27.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje27.jpg)
 
-![Rakennusohje](/ohje28.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje28.jpg)
 
-![Rakennusohje](/ohje29.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje29.jpg)
 
-![Rakennusohje](/ohje30.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje30.jpg)
 
 Kiinnitä moottorit edessä oleviin portteihin A ja D, taakse värisensori porttiin 2 ja IR sensori porttiin 3. Varmista että pään kaapelit pääsee vapaasti liikkumaan ja että pää on niin syvällä robotin sisällä kuin mahdollista. Pään liikuttaminen käsin keskikokoisen moottorin asentamisen jälkeen on hankalaa.
 
-![Rakennusohje](/ohje31.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje31.jpg)
 
 Varmista että moottorin ratas ottaa hyvin kiinni pään rattaaseen ja rattaiden välinen kulma on täsmälleen 90 astetta. Muuten pää ei liiku täsmällisesti.
 
-![Rakennusohje](/ohje32.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje32.jpg)
 
 Kiinnitä keskikokoinen moottori porttiin C 25cm kaapelilla.
 
-![Rakennusohje](/ohje33.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje33.jpg)
 
 Kiinnitä keskikokoinen moottori robotin perässä oleviin sinisiin vapaisiin tappeihin pitkillä mustilla osilla. Muut on renkaiden kiinnitykseen.
 
-![Rakennusohje](/ohje34.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje34.jpg)
 
-![Rakennusohje](/ohje35.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje35.jpg)
 
 Rakennetaan vielä pään liikuttamiseen tarkoitetulle rattaalle tuki. Muuten rattaat irtoavat herkästi toisitaan taistelun keskellä...
 
-![Rakennusohje](/ohje36.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje36.jpg)
 
 Kiinnitä osat kuminauhalla aiemmin lisäämäämme palloon.
 
-![Rakennusohje](/ohje37.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje37.jpg)
 
 Renkaat on molemmilla puolin robottia samanlaiset.
 
-![Rakennusohje](/ohje38.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje38.jpg)
 
-![Rakennusohje](/ohje39.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje39.jpg)
 
-![Rakennusohje](/ohje40.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje40.jpg)
 
 Kiinnitä telaketjut ja valmista!
 
-![Rakennusohje](/ohje41.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje41.jpg)
 
-![Rakennusohje](/ohje42.jpg?raw=true " ")
+![Rakennusohje](/docs/rakennusohje/ohje42.jpg)
