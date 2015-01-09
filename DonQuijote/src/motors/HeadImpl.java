@@ -3,6 +3,10 @@ package motors;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 
+/**
+ * Moves the robot head and keeps track of it's current position.
+ *
+ */
 public class HeadImpl implements Head {
 	
 	private EV3MediumRegulatedMotor motor;
@@ -27,21 +31,20 @@ public class HeadImpl implements Head {
 	
 	@Override
 	public void contractFully() {
-		prolongHead(-5);
-		position = 0;
+		prolongHead(0);
+	}
+
+	@Override
+	public void attackForward() {
+		motor.setSpeed(550);
+		prolongHead(60);
+		contractFully();
+		motor.setSpeed(360);
 	}
 	
 	private void prolongHead(int mm) {
 		motor.rotate((int)(rotFormm * (mm - position)));
 		position = mm;
-	}
-
-	@Override
-	public void attack() {
-		motor.setSpeed(550);
-		prolongHead(60);
-		contractFully();
-		motor.setSpeed(360);
 	}
 
 }

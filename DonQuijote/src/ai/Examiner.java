@@ -8,6 +8,16 @@ import motors.Head;
 import motors.HeadImpl;
 import motors.Movable;
 
+/**
+ * Used to examine targets and react to them based on color of the
+ * target.
+ * 
+ * The robot needs to be facing towards the target, before calling
+ * exaineTarget() method. It will then move close enough to detect
+ * the target color, act accordingly and then move back to the location
+ * it started from.
+ *
+ */
 public class Examiner {
 	
 	private Movable move;
@@ -164,7 +174,7 @@ public class Examiner {
 		Button.LEDPattern(2);
 		head.contractFully();
 		move.moveForward(3);
-		head.attack();
+		head.attackForward();
 		move.moveBackward(3);
 		Button.LEDPattern(0);
 	}

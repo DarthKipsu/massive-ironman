@@ -1,5 +1,9 @@
 package motors;
 
+/**
+ * Interface for moving robot motors.
+ *
+ */
 public interface Movable {
 
 	void moveForward(int cm);

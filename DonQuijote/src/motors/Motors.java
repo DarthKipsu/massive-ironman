@@ -4,6 +4,10 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.robotics.RegulatedMotor;
 
+/**
+ * Moves robot motors to make it move straight or rotate.
+ *
+ */
 public class Motors implements Movable {
 	
 	private RegulatedMotor rightMotor;
@@ -14,8 +18,8 @@ public class Motors implements Movable {
 	public Motors() {
 		rightMotor = new EV3LargeRegulatedMotor(MotorPort.A);
 		leftMotor = new EV3LargeRegulatedMotor(MotorPort.D);
-		tireSpacing = 20;
-		travelPerDegree = 14.6;
+		tireSpacing = 20; // Increase if robot tires are further away from each other
+		travelPerDegree = 14.6; // Increase if robot tire diameter is bigger
 	}
 	
 	@Override

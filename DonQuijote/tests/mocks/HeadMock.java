@@ -13,7 +13,7 @@ public class HeadMock implements Head {
 	}
 
 	@Override
-	public void attack() {		
+	public void attackForward() {		
 	}
 
 	@Override

@@ -4,6 +4,18 @@ import motors.Movable;
 import sensors.IRSensor;
 import sensors.IRSensorImpl;
 
+/**
+ * Used to find objects in front to the robot.
+ * 
+ * Will rotate towards left until IR sensor detects there's an object
+ * in front of the robot. Stops and returns the distance to the target
+ * as an integer. 0 is right in front of the sensor, anything bigger is
+ * relatively further away.
+ * 
+ * The robot will also stop once it has rotated 360 degrees and return
+ * -1 as a sign of finished search.
+ *
+ */
 public class ObjectFinder {
 	
 	private Movable move;

@@ -6,6 +6,10 @@ import lejos.hardware.Button;
 import motors.Motors;
 import motors.Movable;
 
+/**
+ * Main class for the robot. Initiates the program.
+ *
+ */
 public class Main {
 	
 	private static Movable motors;
