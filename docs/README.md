@@ -41,3 +41,51 @@ Kohteiden havaitseminen ja suuri osa taistelutoiminnallisuudesta on pään tarjo
 Robotille on lisätty lisäksi haarniskamaisia vahvistuksia rungon ympärille lisäämään taistelurobottimaista ulkonäköä, mutta näillä ei ole mitään käytännön merkitystä toiminnan kannalta.
 
 Tarkemmat rakennusohjeet kuvineen löytyy [rakennusohje kansiosta](/docs/rakennusohje).
+
+Koodin rakenne
+--------------
+
+Robotin älyllisen toiminnan kannalta oleellisimmat luokat ovat ObjectFinder, jonka logiikan mukaan robotti kääntyy etsimään edessä olevia kohteita, sekä Examiner, joka ottaa vallan kohteen löydyttyä, käskien robotin lähestymään kohdetta ja reagoimaan siihen toivotulla tavalla. Luokat pitävät myös muistissa tietoa robotin sijainnista milläkin hetkellä, jonka avulla robotti pystyy jatkamaan uusien kohteiden etsimistä ja tuhoamista aina hoideltuaan edellisen kohteen.
+
+Luokkien käyttö on pyritty pitämään yksinkertaisena ja niin julkisia metodeja, joiden avulla kaikki tämä hoituu on molemmissa luokissa vain yksi.
+
+Lisäksi loin luokat robotin moottorien ja sensorien käsittelyyn, jotka varmistavat että kaikki robotin fyysisiä toimintoja on helppo käyttää. Robotin liikkuminen hoituu Motors luokalla, pään liikuttaminen HeadImpl luokalla ja seonsoridatan pyytäminen luokista ColorSensorImpl ja IRSensorImpl.
+
+ObjectFinder ja Examiner luokat tuntee sensoriluokat niille luotujen interfacejen kautta, jotta luokkien logiikan jUnit yksikkötestaus on mahdollista.
+
+Testaus
+-------
+
+Robotin toimintaa on testattu ajamalla robotin ohjelma pientenkin uusien toiminnallisuuksien lisäyksien jälkeen ja näin varmistamalla haluttu toiminta koko kehitystyön ajan. Kun kohteiden löytämiseen ja tunnistamiseen tarvittavat metodit toimivat, tein jUnit testit niiden takana olevalle logiikalle varmistaakseni että toiminta pysyy oikeana myös uusia ominaisuuksia lisätessä tai koodia refaktoroidessa. Testit kattavat tärkeimmät rajatapaukset, jotka takaavat robotin oikean reaktion eri tilanteissa.
+
+Mekaanisesti suoritetuilla testeillä on selvitetty lähinnä millä tavoin robotti kykenee reagoimaan kohteisiin:
+
+**Testi 1:**
+
+Testasin robotin kykyä havaita eri etäisyyksillä olevia objekteja asettelemalla legopalikoista koottuja torneja robotin ympärille, kukin aina edellistä kauemmaksi. Robotin tehtävä oli kääntyä itsensä ympäri ja kirjata ylös näkemänsä objektien etäisyydet. Näin sain parin testin aikana melko hyvän käsityksen siitä kuinka kauas sijoitettuja kohteita robotti pystyy havaitsemaan.
+
+Testistä selvisi myös, ettei robotin sensori koskaan mittaa arvoja paljon yli 50 (maksimissaan ehkä 55) vaikka sensorin kuuluisi palauttaa arvoja väliltä 0-100. Näin ollen muutin koodia niin että kaikki yli 50 lukemat jätetään huomiotta, koska robotin sensori luki näitä yli 50 arvoja silloinkin kun edessä ei ollut mitään.
+
+Myöhemmin testatessani robottia eri huoneessa (eri valaistusolot) huomasin robotin näkevän pidemmälle keltaisessa kuin valkoisessa valossa.
+
+**Testi 2:**
+
+Värien erottelu testissä asetin robotin mittaamaan värisensorilla havaitsemiaan arvoja ja kirjaamaan ne ylös. Laitoin värisensorin eteen vuorotellen eri värisiä ja eri materiaalista koostuvia esineitä ja katsoin kuinka tarkasti väri saatiin miltäkin etäisyydeltä mitattua.
+
+Parhaiksi materiaaleiksi osoittautui toiset legopalikat ja pinnoitettu paperi, mutta mittaustuokset olivat hyvin vaihtelevia. Tummia kohteita (kuten useat ruskeat ja viininpunaiset, musta) seonsori ei havainnut lainkaan. Mustaa ja keltaista arvoa en saanut mitattua kertaakaan, kaikki keltaiset palikat ja esineet olivat vihreitä tai ruskeita. Lähes neljännes kaikista mittauksista osoitti ruskeaa, huolimatta edessä olevan esineen väristä. Parhaiten tunnistettavia värejä olivat valkoinen, punainen ja sininen.
+
+Värien tunnistus toimi paremmin lämpimämmän sävyisessä valossa, kuin esim. päivänvalolampun alla. Robotin toiminnan laajempaa testausta lämpimässä valossa ei kuitenkaan pystynyt suorittaa, sillä kotoani ei löydy riittävän isoa tilaa varsinaisen ohjelman ajamiselle keltaisessa valossa.
+
+**Testi 3:**
+
+Robotti on ohjelmoitu skannaamaan ympärillään olevat esteet kiertämällä 360 astetta itsensä ympäri ja kirjoittamaan kohteiden sijainnit muistiin. Testissää robotin tulee palata näihin sijainteihin siinä järjestyksessä, mitkä kohteet ovat lähimpinä.
+
+Testi ei onnistunut, robotti löytää kohteet ja kirjaa niiden astekulmat ja etäisyydet ylös. Robotin kääntyminen ei kuitenkaan ole riittävän täsmällistä ja robotilla on vaikeuksia löytää kaikki kohteet uudelleen. Yritin korjata tilannetta asettamalla robotille ohjeet joiden avulla se voi etsiä kohteen uudelleen, mutta tämäkin johti väärien kohteiden löytymiseen jos robotti kääntyy alunperin merkittävästi väärän määrän.
+
+Testin perusteella päätin muuttaa tavan jolla robotti etsii kohteet. Se tulee jatkossa käymään tutkimassa kohteet saman tien ne ensimmäisen kerran nähdessään. Näin moottorien epätarkkuus ei ole yhtä suuri ongelma.
+
+**Testi 4:**
+
+Robotti siirtyy kohteiden eteen nyt heti ne havaitessan. Testin tarkoituksena on selvittää kuinka hyvin robotti pystyy parkkeeraamaan kohteiden  eteen ja tunnistamaan niiden värin. Tällä kertaa testit onnistui niin hyvin kuin värien erottelu sensorin aiemman testauksen perusteella osasi odottaa. Robotilla on yhä taipumus tunnistaa värejä ruskeaksi, mutta parkkeeraus kohteen eteen ja värin tunnistaminen toimii hyvin.
+
+Testin perusteella tunnistus toimii parhaiten, mikäli tuulimyllyjen lavat ovat + asennossa x asennon sijasta. Silloin lapa on oikealla korkeudella jotta värisensori pystyy lukemaan värin myös siitä eikä robotti aja kohteen ohi.
