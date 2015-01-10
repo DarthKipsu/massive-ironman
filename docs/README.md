@@ -89,3 +89,25 @@ Testin perusteella päätin muuttaa tavan jolla robotti etsii kohteet. Se tulee 
 Robotti siirtyy kohteiden eteen nyt heti ne havaitessan. Testin tarkoituksena on selvittää kuinka hyvin robotti pystyy parkkeeraamaan kohteiden  eteen ja tunnistamaan niiden värin. Tällä kertaa testit onnistui niin hyvin kuin värien erottelu sensorin aiemman testauksen perusteella osasi odottaa. Robotilla on yhä taipumus tunnistaa värejä ruskeaksi, mutta parkkeeraus kohteen eteen ja värin tunnistaminen toimii hyvin.
 
 Testin perusteella tunnistus toimii parhaiten, mikäli tuulimyllyjen lavat ovat + asennossa x asennon sijasta. Silloin lapa on oikealla korkeudella jotta värisensori pystyy lukemaan värin myös siitä eikä robotti aja kohteen ohi.
+
+Rajoitukset ja tulevaisuus
+--------------------------
+
+Robotti tunnistaa ainoastaan kohteita jotka ovat riittävän korkeita. IR sensori on kiinnitettynä robotin päähän niin että se on hiukan yläkenossa. Mitä kauempana kohde on sen korkeampi sen tulee olla. Projektissa käytwttyjen tuulimyllyjen korkeus on noin 15 cm, mutta paljon tätä matalammat kohteet jää sensorin alapuolelle. Tätä voisi korjata suunnittelemalla pään rakenne eri tavoin niin että sensori osoittaisi alemmas.
+
+Robotti odottaa kohteiden olevan ainakin muutaman senttimetrin levyisiä. Kun kohde tunnistetaan, robotti korjaa asentoaan jotta suuntaus olisi keskelle kohdetta. Jos kohde on liian kapea, hypätään tässä kohteen ohi... Leveydellä ei sen sijaan ole ylämittaa, vaan kohde voi olla kuinka leveä tahansa ja se tunnistetaan yhdeksi kohteeksi. Alun korjauksen voi poistaa, mikäli kohde on suorakulmion muotoinen, (se on lisätty tuulimyllyn lapojen takia) jolloin myös kapeampien kohteiden tunnistamisen pitäisi sujua paremmin.
+
+Jatkokehittelyssä robotin liikkumista voisi yrittää säätää vähemmän katkonaiseksi. Myös värien tunnistusta useammilla erilaisilla materiaaleilla voisi testata parhaan tunnistettavuuden löytämiseksi, sekä erilaisia valaistusoloja, joilla ruskeita tunnistukisa voisi minimoida.
+
+Käyttöohje
+----------
+
+Kokoa robotti [rakennusohjeen](/docs/rakennusohje) mukaisesti ja aja Main.java ohjelma lejOs EV3 ohjelmana. Jos ohjelman asettaa robotin valikosta oletusohjelmaksi, se käynnistyy uudelleen keskimmäistä nappia painamalla. Ohjelman voi keskeyttää kesken suorituksen painamalla samaan aikaan keskimmäistä ja alinta nappia.
+
+Sijoita robotti keskelle huonetta niin että tilaa on reilusti joka suuntaan. Laita päälle kaikki valot, silloin värisensori toimii parhaiten.
+
+Sijoita rakentamasi tuulimyllyt tai muut värikkäät kohteet robotin ympärille. Sopiva etäisyys on noin 10-40cm. Tuulimyllyjen välissä tulee olla ainakin pieni väli, jotta ne tunnistetaan erillisiksi kohteiksi, mutta muuten sijoittelulla ei ole merkitystä.
+
+Käynnstä robotti painamalla keskimmäistä nappia.
+
+Robotin kierrettyä 360 asteen kierros, se pysähtyy ja konsoliin syttyy punainen ledvalo merkiki ohjelman päättymisestä. Näytöllä näkyy lista havaituista kohteista ja värit joiksi ne on tunnistettu. Keskimmäsitä nappia painamalla ohjelma loppuu.
