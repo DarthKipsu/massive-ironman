@@ -1,9 +1,0 @@
-Toisen viikon alussa keskityin robotin rakenteen kokoamiseen. Ensimmäisessä versiossa robotti kulki pyörillä, mutta koska takapyörät eivät liikkuneet ja siten jarruttivat ikävästi kääntyessä, päätin vaihtaa telaketjuihin, jotka robotin mukana tulivat. Tämäkään liikkumismuoto ei ollut täysin ongelmaton sopivien renkaiden ja rattaiden puutteen vuoksi, mutta toimii lopulta riittävän hyvin. Rakensin lisäksi robotille pään, jota se pystyy liikuttamaan keksikokoisen moottorin avulla eteen ja taakse. Päässä on kiinni infrapuna- ja värientunnistus sensorit ja sitä voi käyttää mm. tökkäämään kohteita kumoon.
-
-Rakensin lisäksi muutaman eri värisen kohteen robotille, joihin sen tulee myöhemmin reagoida, joiden avulla olen testannut kohteiden paikantamista.
-
-Joulun jälkeen ohjelmoin robotin tunnistamaan ympärillään olevat kohteet kääntymällä 360 astetta itsensä ympäri, 5 astetta kerrallaan ja kirjaamalla aina muistiin mittaamansa etäisyyden sillä kohdalla. Robotti muistaa kohteet siinä järjestyksessä mitkä kohteet ovat lähimpänä ja osaa kääntyä näiden suuntaan, sekä kulkea niitä kohti. Tutkittuaan yhden kohteen (ei vielä tee muuta kuin kulkee sen eteen) robotti kääntyy kohti seuraavaa jne. kunnes kaikki kohteet on tarkastettu.
-
-Tämän hetkinen ongelma on että kääntyminen ei ole aina täsmällistä, joten kohdentaminen tulee tehdä varmuuden vuoksi uudestaan siinä vaiheessa kun robotti on kääntynyt aiemmin ylös kirjaamaansa suuntaan. Varsinkin kun useampi kohde on käyty tarkastamassa, voi robotti olla siirtynyt sen verran sivuun "kurssistaan" että se kääntyy kohteesta sivuun. Kun kohteiden eteen siirtyminen on saatu riittävän tarkaksi, jää tehtäväksi reagoida kohteisiin niiden värien mukaisesti.
-
-Kohteiden tarkempi kohdentaminen on tehtävälistalla viikonloppuna ja ensi viikolla tarkoitus on ohjelmoida robotille käytöstä jolla reagoida kohteisiin.
